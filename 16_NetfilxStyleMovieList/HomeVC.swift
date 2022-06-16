@@ -36,7 +36,7 @@ class HomeVC : UICollectionViewController{
         self.collectionView.register(ContentViewRankCell.self, forCellWithReuseIdentifier: "ContentViewRankCell")
         self.collectionView.register(ContentViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "ContentViewHeader")
         
-        self.collectionView.collectionViewLayout = self.layout()ㅋ
+        self.collectionView.collectionViewLayout = self.layout()
     }
     
     func getContents() -> [Content]{
