@@ -17,6 +17,7 @@
 		D4CDBBD22858895B00180989 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CDBBD12858895B00180989 /* HomeVC.swift */; };
 		D4CDBBD928588DA700180989 /* Content.plist in Resources */ = {isa = PBXBuildFile; fileRef = D4CDBBD828588DA700180989 /* Content.plist */; };
 		D4CDBBDB28588DF800180989 /* Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CDBBDA28588DF800180989 /* Content.swift */; };
+		D4F4912A285B39A1002BCFD7 /* ContentViewRankCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F49129285B39A1002BCFD7 /* ContentViewRankCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		D4CDBBD12858895B00180989 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		D4CDBBD828588DA700180989 /* Content.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Content.plist; sourceTree = "<group>"; };
 		D4CDBBDA28588DF800180989 /* Content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Content.swift; sourceTree = "<group>"; };
+		D4F49129285B39A1002BCFD7 /* ContentViewRankCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewRankCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 				D4CDBBD828588DA700180989 /* Content.plist */,
 				D4CDBBDA28588DF800180989 /* Content.swift */,
 				D4CDBBD12858895B00180989 /* HomeVC.swift */,
+				D4F49129285B39A1002BCFD7 /* ContentViewRankCell.swift */,
 				D4369C272859DC2A00F5F006 /* ContentViewCell.swift */,
 			);
 			path = 16_NetfilxStyleMovieList;
@@ -160,6 +163,7 @@
 				D4CDBBBE2857459F00180989 /* AppDelegate.swift in Sources */,
 				D4369C2D2859E01200F5F006 /* ContentViewHeader.swift in Sources */,
 				D4CDBBC02857459F00180989 /* SceneDelegate.swift in Sources */,
+				D4F4912A285B39A1002BCFD7 /* ContentViewRankCell.swift in Sources */,
 				D4CDBBDB28588DF800180989 /* Content.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
