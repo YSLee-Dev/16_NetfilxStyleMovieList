@@ -35,14 +35,15 @@ class HomeVC : UICollectionViewController{
         self.collectionView.register(ContentViewCell.self, forCellWithReuseIdentifier: "ContentViewCell")
         self.collectionView.register(ContentViewRankCell.self, forCellWithReuseIdentifier: "ContentViewRankCell")
         self.collectionView.register(ContentViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "ContentViewHeader")
+        self.collectionView.register(ContentViewMainCell.self, forCellWithReuseIdentifier: "ContentViewMainCell")
         
         self.collectionView.collectionViewLayout = self.layout()
     }
     
     func getContents() -> [Content]{
         guard let path = Bundle.main.path(forResource: "Content", ofType: "plist"),
-                let data = FileManager.default.contents(atPath: path),
-                let list = try? PropertyListDecoder().decode([Content].self, from: data) else {return []}
+              let data = FileManager.default.contents(atPath: path),
+              let list = try? PropertyListDecoder().decode([Content].self, from: data) else {return []}
         return list
     }
 }
@@ -51,17 +52,12 @@ class HomeVC : UICollectionViewController{
 extension HomeVC{
     // 섹션당 보여질 셀의 개수
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if self.contents[section].sectionType == .basic || self.contents[section].sectionType == .large || self.contents[section].sectionType == .rank{
-            switch section {
-            case 0:
-                return 1
-            default :
-                return contents[section].contentItem.count
-            }
-        }else{
-            return 0
+        switch section {
+        case 0:
+            return 1
+        default :
+            return contents[section].contentItem.count
         }
-        
     }
     
     // 콜렉션 뷰 셀 설정
@@ -76,7 +72,11 @@ extension HomeVC{
             cell.imageView.image = self.contents[indexPath.section].contentItem[indexPath.row].image
             cell.rankLabel.text = "\((indexPath.row) + 1)"
             return cell
-        default : return UICollectionViewCell()
+        case .main:
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ContentViewMainCell", for: indexPath) as? ContentViewMainCell else {return UICollectionViewCell()}
+            cell.label.text = self.contents[indexPath.section].contentItem[indexPath.row].description
+            cell.imageView.image = self.contents[indexPath.section].contentItem[indexPath.row].image
+            return cell
         }
     }
     
@@ -114,8 +114,8 @@ extension HomeVC{
                 return self.createLargeSection()
             case .rank:
                 return self.createRankSection()
-            default:
-                return nil
+            case .main:
+                return self.createMainSection()
                 
             }
         }
@@ -172,6 +172,19 @@ extension HomeVC{
         section.orthogonalScrollingBehavior = .continuous
         section.contentInsets = .init(top: 0, leading: 5, bottom: 0, trailing: 5)
         section.boundarySupplementaryItems = [self.createSectionHeader()]
+        
+        return section
+    }
+    
+    // 메인 화면 layout
+    private func createMainSection() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(1.2))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 1)
+        
+        let section = NSCollectionLayoutSection(group: group)
         
         return section
     }
