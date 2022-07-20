@@ -98,8 +98,10 @@ extension HomeVC{
     
     // 셀 선택
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let sectionName = contents[indexPath.section].sectionName
-        print("\(sectionName) 섹션 선택됨 \(indexPath.row+1)번 째 콘텐츠")
+        let seletedItem = self.contents[indexPath.section].contentItem[indexPath.row]
+        let detailView = DetailView(item: seletedItem)
+        let hostingVC = UIHostingController(rootView: detailView)
+        self.show(hostingVC, sender: nil)
     }
     
     // 각각의 섹션 타입에 대한 UICollectionViewLayout 생성
@@ -203,16 +205,18 @@ extension HomeVC{
 // SwiftUI를 활용한 미리보기
 struct HomeVC_Previews : PreviewProvider {
     static var previews: some View {
-        Container().edgesIgnoringSafeArea(.all)
+        HomeVCRepresentable().edgesIgnoringSafeArea(.all)
     }
     
-    struct Container: UIViewControllerRepresentable {
-        func makeUIViewController(context: Context) -> UIViewController {
-            let layout = UICollectionViewFlowLayout()
-            let homeVC = HomeVC(collectionViewLayout: layout)
-            return UINavigationController(rootViewController: homeVC)
-        }
-        func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {}
-        typealias UIViewControllerType = UIViewController
+    
+}
+
+struct HomeVCRepresentable: UIViewControllerRepresentable {
+    func makeUIViewController(context: Context) -> UIViewController {
+        let layout = UICollectionViewFlowLayout()
+        let homeVC = HomeVC(collectionViewLayout: layout)
+        return UINavigationController(rootViewController: homeVC)
     }
+    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {}
+    typealias UIViewControllerType = UIViewController
 }
